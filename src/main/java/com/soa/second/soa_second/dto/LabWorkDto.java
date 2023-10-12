@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Setter
@@ -20,7 +21,7 @@ public class LabWorkDto {
     private String name;
     @NotNull
     private CoordinatesDto coordinates;
-    private LocalDate creationDate;
+    private Instant creationDate;
     @Min(value = 0)
     private Integer minimalPoint;
     private Difficulty difficulty;
