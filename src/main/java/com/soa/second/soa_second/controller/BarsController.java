@@ -22,7 +22,7 @@ public class BarsController {
         try {
             return Response.ok(barsService.increaseStepsCount(id, stepsCount)).build();
         } catch (FeignException e) {
-            return e.status() == -1 ? Response.status(Response.Status.BAD_GATEWAY.getStatusCode())
+            return e.status() == -1 ? Response.status(Response.Status.GATEWAY_TIMEOUT.getStatusCode())
                     .entity("Service unavailable")
                     .build() : Response.status(e.status()).entity(e.contentUTF8()).build();
         }
@@ -34,7 +34,7 @@ public class BarsController {
         try {
             return Response.ok(barsService.makeHardcore(id)).build();
         } catch (FeignException e) {
-            return e.status() == -1 ? Response.status(Response.Status.BAD_GATEWAY.getStatusCode())
+            return e.status() == -1 ? Response.status(Response.Status.GATEWAY_TIMEOUT.getStatusCode())
                     .entity("Service unavailable")
                     .build() : Response.status(e.status()).entity(e.contentUTF8()).build();
         }
