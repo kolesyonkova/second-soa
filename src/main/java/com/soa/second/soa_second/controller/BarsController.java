@@ -22,19 +22,21 @@ public class BarsController {
         try {
             return Response.ok(barsService.increaseStepsCount(id, stepsCount)).build();
         } catch (FeignException e) {
-            return Response.status(e.status() == -1 ? Response.Status.SERVICE_UNAVAILABLE.getStatusCode() : e.status())
-                    .entity(e.contentUTF8()).build();
+            return e.status() == -1 ? Response.status(Response.Status.BAD_GATEWAY.getStatusCode())
+                    .entity("Service unavailable")
+                    .build() : Response.status(e.status()).entity(e.contentUTF8()).build();
         }
     }
 
     @POST
-    @Path("/discipline/{discipline-id}/make-hardcore")
+    @Path("/disciplines/{discipline-id}/make-hardcore")
     public Response makeHardcore(@PathParam("discipline-id") Integer id) {
         try {
             return Response.ok(barsService.makeHardcore(id)).build();
         } catch (FeignException e) {
-            return Response.status(e.status() == -1 ? Response.Status.SERVICE_UNAVAILABLE.getStatusCode() : e.status())
-                    .entity(e.contentUTF8()).build();
+            return e.status() == -1 ? Response.status(Response.Status.BAD_GATEWAY.getStatusCode())
+                    .entity("Service unavailable")
+                    .build() : Response.status(e.status()).entity(e.contentUTF8()).build();
         }
     }
 }
