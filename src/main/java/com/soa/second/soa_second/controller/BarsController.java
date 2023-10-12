@@ -1,6 +1,5 @@
 package com.soa.second.soa_second.controller;
 
-import com.soa.second.soa_second.dto.LabWorkDto;
 import com.soa.second.soa_second.service.BarsService;
 import feign.FeignException;
 import lombok.AllArgsConstructor;
@@ -22,6 +21,17 @@ public class BarsController {
     public Response increaseStepsCount(@PathParam("labwork-id") Integer id, @PathParam("steps-count") Integer stepsCount) {
         try {
             return Response.ok(barsService.increaseStepsCount(id, stepsCount)).build();
+        } catch (FeignException e) {
+            return Response.status(e.status() == -1 ? Response.Status.SERVICE_UNAVAILABLE.getStatusCode() : e.status())
+                    .entity(e.contentUTF8()).build();
+        }
+    }
+
+    @POST
+    @Path("/discipline/{discipline-id}/make-hardcore")
+    public Response makeHardcore(@PathParam("discipline-id") Integer id) {
+        try {
+            return Response.ok(barsService.makeHardcore(id)).build();
         } catch (FeignException e) {
             return Response.status(e.status() == -1 ? Response.Status.SERVICE_UNAVAILABLE.getStatusCode() : e.status())
                     .entity(e.contentUTF8()).build();

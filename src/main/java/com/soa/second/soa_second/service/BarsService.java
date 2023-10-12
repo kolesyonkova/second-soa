@@ -5,6 +5,8 @@ import com.soa.second.soa_second.feign.LabWorkClient;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class BarsService {
@@ -12,5 +14,9 @@ public class BarsService {
 
     public LabWorkDto increaseStepsCount(Integer id, Integer stepsCount) {
         return labWorkClient.increaseStepsCount(id, stepsCount);
+    }
+
+    public List<LabWorkDto> makeHardcore(Integer id) {
+        return labWorkClient.makeHardcore(id);
     }
 }
